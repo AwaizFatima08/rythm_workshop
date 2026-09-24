@@ -1,17 +1,16 @@
-# rhythm_workshop
+# Rhythm Workshop
 
-A new Flutter project.
+Sort toys to the beat. A calm, offline music-and-sorting game for children aged 3–6, by HomiLabs Solutions.
 
-## Getting Started
+Toys ride a conveyor belt in a wooden workshop. Children drag each toy into the right bin (by colour, size, shape, or fruit vs vegetable, then a simple pattern). Every correct sort plays a chime that lands on the beat, and at the end the child's notes replay as "the song you made".
 
-This project is a starting point for a Flutter application.
+- 12 levels in 4 worlds, all open from the start
+- No failure: wrong drops float back, toys never fall off, the music waits for the child
+- Colour always paired with a shape symbol; calm mode; English and Urdu voice
+- No internet permission, no ads, no purchases, no tracking
 
-A few resources to get you started if this is your first Flutter project:
+Built with Flutter, [Flame](https://flame-engine.org) and [flutter_soloud](https://pub.dev/packages/flutter_soloud). All art, music and voice were generated locally by the scripts in `scripts/` (see `LICENSES.md`).
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Design: `docs/design-document-v0.md`, decisions: `docs/design-review-v1.md`
+- Privacy policy: `docs/privacy-policy.html`
+- Testing: `docs/testing.md`; Play Console: `docs/play-console-listing-kit.md`

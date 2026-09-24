@@ -98,16 +98,23 @@ class LevelCard extends StatelessWidget {
               ],
             ),
             Expanded(
-              child: Center(
-                child: Wrap(
-                  alignment: WrapAlignment.center,
-                  spacing: 4,
-                  children: [
-                    for (final img in binImages)
-                      Image.asset('assets/images/$img', width: (w * 0.86) / binImages.length.clamp(2, 3)),
-                  ],
-                ),
-              ),
+              child: LayoutBuilder(builder: (context, c) {
+                // Two bins side by side; three as two over one.
+                final n = binImages.length;
+                final each = n == 3 ? (c.maxWidth - 8) / 2 : (c.maxWidth - 8 * (n - 1)) / n;
+                return Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    runAlignment: WrapAlignment.center,
+                    spacing: 8,
+                    runSpacing: 4,
+                    children: [
+                      for (final img in binImages)
+                        Image.asset('assets/images/$img', width: each, height: c.maxHeight / (n == 3 ? 2.1 : 1)),
+                    ],
+                  ),
+                );
+              }),
             ),
             SizedBox(
               height: height * 0.2,

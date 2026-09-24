@@ -53,6 +53,9 @@ class SoloudAudioEngine implements AudioEngine {
   SoundHandle? _speaking;
   bool _ready = false;
 
+  /// True once the native engine started and all effects loaded.
+  bool get isReady => _ready;
+
   static final _sfxFiles = [
     'sfx/sfx_pick_up.wav', 'sfx/sfx_sparkle.wav', 'sfx/sfx_soft_note.wav', 'sfx/sfx_whoosh.wav',
     'perc/perc_tap_down.wav', 'perc/perc_tap_up.wav', 'perc/perc_fill.wav',
