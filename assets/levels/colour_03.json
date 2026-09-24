@@ -1,0 +1,93 @@
+{
+  "id": "colour_03",
+  "index": 3,
+  "world": 1,
+  "sortBy": "colour",
+  "music": "bgm_calm.ogg",
+  "bpm": 70,
+  "beltSpeed": 80,
+  "practiceTaps": false,
+  "voicePrompt": "vo_prompt_colour",
+  "spawnEveryBeats": 4,
+  "maxOnBelt": 3,
+  "itemCount": 12,
+  "bins": [
+    {
+      "id": "red",
+      "symbol": "circle",
+      "image": "bins/bin_red.png"
+    },
+    {
+      "id": "blue",
+      "symbol": "square",
+      "image": "bins/bin_blue.png"
+    },
+    {
+      "id": "yellow",
+      "symbol": "star",
+      "image": "bins/bin_yellow.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "car_red",
+      "bin": "red",
+      "image": "items/car_red.png"
+    },
+    {
+      "id": "ball_red",
+      "bin": "red",
+      "image": "items/ball_red.png"
+    },
+    {
+      "id": "block_red",
+      "bin": "red",
+      "image": "items/block_red.png"
+    },
+    {
+      "id": "duck_red",
+      "bin": "red",
+      "image": "items/duck_red.png"
+    },
+    {
+      "id": "car_blue",
+      "bin": "blue",
+      "image": "items/car_blue.png"
+    },
+    {
+      "id": "ball_blue",
+      "bin": "blue",
+      "image": "items/ball_blue.png"
+    },
+    {
+      "id": "block_blue",
+      "bin": "blue",
+      "image": "items/block_blue.png"
+    },
+    {
+      "id": "duck_blue",
+      "bin": "blue",
+      "image": "items/duck_blue.png"
+    },
+    {
+      "id": "car_yellow",
+      "bin": "yellow",
+      "image": "items/car_yellow.png"
+    },
+    {
+      "id": "ball_yellow",
+      "bin": "yellow",
+      "image": "items/ball_yellow.png"
+    },
+    {
+      "id": "block_yellow",
+      "bin": "yellow",
+      "image": "items/block_yellow.png"
+    },
+    {
+      "id": "duck_yellow",
+      "bin": "yellow",
+      "image": "items/duck_yellow.png"
+    }
+  ]
+}

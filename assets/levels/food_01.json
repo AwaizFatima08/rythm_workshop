@@ -1,0 +1,88 @@
+{
+  "id": "food_01",
+  "index": 10,
+  "world": 4,
+  "sortBy": "category",
+  "music": "bgm_workshop_01.ogg",
+  "bpm": 80,
+  "beltSpeed": 90,
+  "practiceTaps": false,
+  "voicePrompt": "vo_prompt_food",
+  "spawnEveryBeats": 4,
+  "maxOnBelt": 3,
+  "itemCount": 10,
+  "bins": [
+    {
+      "id": "fruit",
+      "symbol": "apple",
+      "image": "bins/bin_fruit.png"
+    },
+    {
+      "id": "veg",
+      "symbol": "carrot",
+      "image": "bins/bin_veg.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "apple",
+      "bin": "fruit",
+      "image": "items/apple.png"
+    },
+    {
+      "id": "banana",
+      "bin": "fruit",
+      "image": "items/banana.png"
+    },
+    {
+      "id": "grapes",
+      "bin": "fruit",
+      "image": "items/grapes.png"
+    },
+    {
+      "id": "strawberry",
+      "bin": "fruit",
+      "image": "items/strawberry.png"
+    },
+    {
+      "id": "pear",
+      "bin": "fruit",
+      "image": "items/pear.png"
+    },
+    {
+      "id": "orange",
+      "bin": "fruit",
+      "image": "items/orange.png"
+    },
+    {
+      "id": "carrot",
+      "bin": "veg",
+      "image": "items/carrot.png"
+    },
+    {
+      "id": "broccoli",
+      "bin": "veg",
+      "image": "items/broccoli.png"
+    },
+    {
+      "id": "corn",
+      "bin": "veg",
+      "image": "items/corn.png"
+    },
+    {
+      "id": "eggplant",
+      "bin": "veg",
+      "image": "items/eggplant.png"
+    },
+    {
+      "id": "peas",
+      "bin": "veg",
+      "image": "items/peas.png"
+    },
+    {
+      "id": "potato",
+      "bin": "veg",
+      "image": "items/potato.png"
+    }
+  ]
+}

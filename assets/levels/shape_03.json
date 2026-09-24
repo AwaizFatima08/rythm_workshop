@@ -1,0 +1,93 @@
+{
+  "id": "shape_03",
+  "index": 9,
+  "world": 3,
+  "sortBy": "shape",
+  "music": "bgm_workshop_01.ogg",
+  "bpm": 80,
+  "beltSpeed": 95,
+  "practiceTaps": false,
+  "voicePrompt": "vo_prompt_shape",
+  "spawnEveryBeats": 4,
+  "maxOnBelt": 3,
+  "itemCount": 12,
+  "bins": [
+    {
+      "id": "circle",
+      "symbol": "circle",
+      "image": "bins/bin_circle.png"
+    },
+    {
+      "id": "square",
+      "symbol": "square",
+      "image": "bins/bin_square.png"
+    },
+    {
+      "id": "triangle",
+      "symbol": "triangle",
+      "image": "bins/bin_triangle.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "circle_red",
+      "bin": "circle",
+      "image": "items/shape_circle_red.png"
+    },
+    {
+      "id": "circle_blue",
+      "bin": "circle",
+      "image": "items/shape_circle_blue.png"
+    },
+    {
+      "id": "circle_yellow",
+      "bin": "circle",
+      "image": "items/shape_circle_yellow.png"
+    },
+    {
+      "id": "circle_green",
+      "bin": "circle",
+      "image": "items/shape_circle_green.png"
+    },
+    {
+      "id": "square_red",
+      "bin": "square",
+      "image": "items/shape_square_red.png"
+    },
+    {
+      "id": "square_blue",
+      "bin": "square",
+      "image": "items/shape_square_blue.png"
+    },
+    {
+      "id": "square_yellow",
+      "bin": "square",
+      "image": "items/shape_square_yellow.png"
+    },
+    {
+      "id": "square_green",
+      "bin": "square",
+      "image": "items/shape_square_green.png"
+    },
+    {
+      "id": "triangle_red",
+      "bin": "triangle",
+      "image": "items/shape_triangle_red.png"
+    },
+    {
+      "id": "triangle_blue",
+      "bin": "triangle",
+      "image": "items/shape_triangle_blue.png"
+    },
+    {
+      "id": "triangle_yellow",
+      "bin": "triangle",
+      "image": "items/shape_triangle_yellow.png"
+    },
+    {
+      "id": "triangle_green",
+      "bin": "triangle",
+      "image": "items/shape_triangle_green.png"
+    }
+  ]
+}

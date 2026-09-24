@@ -1,0 +1,15 @@
+{
+  "_note": "Source of truth for every voice line. 'ur' is the Urdu script shown to humans; 'ur_tts' is the same sentence in Devanagari, which Kokoro's Hindi voice reads (spoken Urdu and Hindi share sounds).",
+  "lines": {
+    "vo_welcome":        {"en": "Welcome to the workshop! Let's sort to the music!", "ur": "ورکشاپ میں خوش آمدید! آئیے موسیقی کے ساتھ چیزیں الگ کریں!", "ur_tts": "वर्कशॉप में ख़ुश आमदीद! आइए, मौसीक़ी के साथ चीज़ें अलग करें!"},
+    "vo_prompt_colour":  {"en": "Red toys in the red box!", "ur": "لال کھلونے لال ڈبے میں!", "ur_tts": "लाल खिलौने, लाल डिब्बे में!"},
+    "vo_prompt_size":    {"en": "Big ones here, small ones there!", "ur": "بڑے یہاں، چھوٹے وہاں!", "ur_tts": "बड़े यहाँ, छोटे वहाँ!"},
+    "vo_prompt_shape":   {"en": "Circles here, squares there!", "ur": "گول یہاں، چوکور وہاں!", "ur_tts": "गोल यहाँ, चौकोर वहाँ!"},
+    "vo_prompt_food":    {"en": "Fruits here, vegetables there!", "ur": "پھل یہاں، سبزیاں وہاں!", "ur_tts": "फल यहाँ, सब्ज़ियाँ वहाँ!"},
+    "vo_prompt_pattern": {"en": "Fruit, vegetable, fruit... what comes next?", "ur": "پھل، سبزی، پھل... آگے کیا آئے گا؟", "ur_tts": "फल, सब्ज़ी, फल... आगे क्या आएगा?"},
+    "vo_try_here":       {"en": "Try this one!", "ur": "یہاں ڈالیں!", "ur_tts": "यहाँ डालें!"},
+    "vo_praise_01":      {"en": "Great rhythm!", "ur": "شاباش! بہت خوب!", "ur_tts": "शाबाश! बहुत ख़ूब!"},
+    "vo_praise_02":      {"en": "Super sorting!", "ur": "زبردست!", "ur_tts": "ज़बरदस्त!"},
+    "vo_goodnight":      {"en": "The workshop is sleeping now. See you soon!", "ur": "ورکشاپ اب سو رہی ہے۔ پھر ملیں گے!", "ur_tts": "वर्कशॉप अब सो रही है। फिर मिलेंगे!"}
+  }
+}

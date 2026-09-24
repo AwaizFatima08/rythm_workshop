@@ -1,0 +1,76 @@
+{
+  "id": "size_03",
+  "index": 6,
+  "world": 2,
+  "sortBy": "size",
+  "music": "bgm_workshop_01.ogg",
+  "bpm": 80,
+  "beltSpeed": 90,
+  "practiceTaps": false,
+  "voicePrompt": "vo_prompt_size",
+  "spawnEveryBeats": 4,
+  "maxOnBelt": 3,
+  "itemCount": 12,
+  "bins": [
+    {
+      "id": "big",
+      "symbol": "big",
+      "image": "bins/bin_big.png"
+    },
+    {
+      "id": "small",
+      "symbol": "small",
+      "image": "bins/bin_small.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "teddy_big",
+      "bin": "big",
+      "image": "items/teddy.png",
+      "scale": 1.0
+    },
+    {
+      "id": "drum_big",
+      "bin": "big",
+      "image": "items/drum.png",
+      "scale": 1.0
+    },
+    {
+      "id": "boat_big",
+      "bin": "big",
+      "image": "items/boat.png",
+      "scale": 1.0
+    },
+    {
+      "id": "rocket_big",
+      "bin": "big",
+      "image": "items/rocket.png",
+      "scale": 1.0
+    },
+    {
+      "id": "teddy_small",
+      "bin": "small",
+      "image": "items/teddy.png",
+      "scale": 0.58
+    },
+    {
+      "id": "drum_small",
+      "bin": "small",
+      "image": "items/drum.png",
+      "scale": 0.58
+    },
+    {
+      "id": "boat_small",
+      "bin": "small",
+      "image": "items/boat.png",
+      "scale": 0.58
+    },
+    {
+      "id": "rocket_small",
+      "bin": "small",
+      "image": "items/rocket.png",
+      "scale": 0.58
+    }
+  ]
+}
