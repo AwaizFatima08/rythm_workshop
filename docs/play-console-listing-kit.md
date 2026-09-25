@@ -56,7 +56,7 @@ Everything to paste into Play Console for the first release. Publisher: **HomiLa
 | --- | --- |
 | App icon 512×512 | `store-assets/icon-512.png` |
 | Feature graphic 1024×500 | `store-assets/feature-graphic-1024x500.png` |
-| Phone screenshots (landscape) | `store-assets/screenshots/` |
+| Phone screenshots (landscape 2160×1080, 2:1) | `store-assets/screenshots/01-home.png` … `05-gameplay.png` (from the release build) |
 
 ## App content forms
 
@@ -81,10 +81,10 @@ Everything to paste into Play Console for the first release. Publisher: **HomiLa
 1. Play Console → Create app (values above).
 2. Upload `releases/v1.0.0-1/rhythm-workshop-1.0.0-1.aab` to **Internal testing**; accept Play App Signing.
 3. Complete Store listing, App content and Data safety from this file.
-4. Enable GitHub Pages for the privacy policy (see below) and check the URL opens.
+4. Check the privacy policy URL opens (GitHub Pages is already enabled from `/docs`).
 5. New personal developer accounts need a **closed test with 12+ testers for 14 days** before production.
 
-**GitHub Pages**: repo → Settings → Pages → *Deploy from a branch* → `main`, folder `/docs`. The policy is then at the URL above.
+**GitHub Pages** (enabled 2026-09-25): serves `main` → `/docs`, so edits to `docs/privacy-policy.html` go live after a push.
 
 ## Notes from testing
 

@@ -20,6 +20,13 @@ A sort-to-the-beat learning game for children aged 3–6: toys ride a conveyor b
 - GitHub (**public**): `git@github.com:AwaizFatima08/rythm_workshop.git` (the folder and repo keep the "rythm" spelling)
 - Backup: `bash scripts/backup.sh`. Commit first; the GitHub layer refuses to push with untracked or uncommitted files.
 
+## Status (2026-09-25)
+v1.0.0 (versionCode 1) is built, signed with the upload key and tested; ready for the owner to upload.
+- `releases/v1.0.0-1/`: AAB, APK, SHA256SUMS, BUILD_INFO (gitignored; in the local and Drive backups).
+- Tests: 93 host tests plus the on-device integration suite (3/3 on the emulator). Owner checks on the real A12 and with children remain (`docs/testing.md` §4).
+- Privacy policy is live: https://awaizfatima08.github.io/rythm_workshop/privacy-policy.html (GitHub Pages from `/docs`).
+- Play Console text and forms: `docs/play-console-listing-kit.md`. Store graphics: `store-assets/`.
+
 ## Code map
 - `lib/game/`: `workshop_game.dart` (Flame game: beats, spawning, drops), `rules.dart` (pure rules: queue, judging, streak, speed, pattern; `findTarget`), `layout.dart` (all positions in dp), `toy.dart` (one-finger drag, 24 dp grab margin), `bin.dart`, `pattern_shelf.dart`, `belt.dart`, `characters.dart` (Milo, Pip), `effects.dart`.
 - `lib/audio/`: `audio_engine.dart` (flutter_soloud; `SilentAudioEngine` for tests), `beat_clock.dart`.
@@ -28,7 +35,7 @@ A sort-to-the-beat learning game for children aged 3–6: toys ride a conveyor b
 - `lib/settings/game_settings.dart`: the single `ChangeNotifier` (shared_preferences). `lib/widgets/parental_gate.dart`.
 
 ## Commands
-- Host tests: `flutter test` (85 tests: rules, beat clock, layouts, assets, full level play with real drags, screens).
+- Host tests: `flutter test` (93 tests: rules, beat clock, layouts, assets, full level play with real drags, screens).
 - Device test: build first, then run with the emulator up:
   `flutter build apk --debug -t integration_test/app_test.dart` then
   `flutter drive --driver=test_driver/integration_test.dart --target=integration_test/app_test.dart --use-application-binary build/app/outputs/flutter-apk/app-debug.apk -d emulator-5590`
@@ -36,5 +43,5 @@ A sort-to-the-beat learning game for children aged 3–6: toys ride a conveyor b
 - Assets (venv `~/tools/venvs/rhythm`): `scripts/make_audio.py`, `scripts/make_voice.py` (Kokoro model in `~/tools/kokoro/`), `scripts/import_voice.py`, `scripts/make_art.py` (Inkscape), `scripts/make_icons.py`, `scripts/make_store_assets.py`, `scripts/make_levels.py`.
 
 ## Machine notes
-- JDK 21: `~/jdks/jdk-21.0.12.1+1`. Gradle heap is capped at 2.5 GB in `android/gradle.properties` because other sessions share the 15 GB of RAM.
+- JDK 21: `~/jdks/jdk-21.0.12.1+1`. Gradle heap is capped at 1.5 GB in `android/gradle.properties` because other sessions share the 15 GB of RAM.
 - Emulator: own AVD `rhythm_api35` in `ANDROID_AVD_HOME=/mnt/storage/projects/android-avd`, port 5590, `-gpu swangle_indirect -cores 2 -memory 2048`. Owner's rule: never run it while another project's emulator is running. Don't stop other sessions' emulators or Gradle daemons, and never `pkill -f`/`pgrep -f` a pattern that also appears in your own command line.
