@@ -76,6 +76,9 @@ class WorkshopGame extends FlameGame {
   bool finished = false;
   bool _started = false;
 
+  @visibleForTesting
+  int get debugRawBeatsSeen => _rawBeats.totalBeats;
+
   List<Toy> get activeToys => toys.where((t) => t.isActive).toList();
 
   double get _latency => settings.latencyMs.toDouble();
