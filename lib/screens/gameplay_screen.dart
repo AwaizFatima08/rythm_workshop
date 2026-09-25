@@ -8,6 +8,7 @@ import '../levels/level.dart';
 import '../theme.dart';
 import '../widgets/buttons.dart';
 import 'reward_screen.dart';
+import '../widgets/keep_awake.dart';
 
 /// Hosts the Flame game plus the hold-to-pause button and pause menu.
 class GameplayScreen extends StatefulWidget {
@@ -75,38 +76,39 @@ class _GameplayScreenState extends State<GameplayScreen> with WidgetsBindingObse
 
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvokedWithResult: (didPop, _) {
-        if (!didPop) _setPaused(true); // system back opens the pause menu
-      },
-      child: Scaffold(
-        body: LayoutBuilder(builder: (context, c) {
-          final pause = _pauseRect(Size(c.maxWidth, c.maxHeight));
-          return Stack(
-            children: [
-              Positioned.fill(child: GameWidget(game: _game)),
-              Positioned(
-                left: pause.left,
-                top: pause.top,
-                child: HoldButton(
-                  key: const ValueKey('pause'),
-                  size: pause.width,
-                  semanticLabel: 'Pause (hold)',
-                  onHeld: () => _setPaused(true),
-                  child: const Icon(Icons.pause_rounded, color: Palette.walnut, size: 36),
-                ),
-              ),
-              if (_paused)
-                Positioned.fill(
-                  child: _PauseMenu(
-                    onResume: () => _setPaused(false),
-                    onHome: () => Navigator.of(context).pop(),
+    return KeepAwake(
+      child: PopScope(
+        canPop: false,
+        onPopInvokedWithResult: (didPop, _) {
+          if (!didPop) _setPaused(true); // system back opens the pause menu
+        },
+        child: Scaffold(
+          body: LayoutBuilder(
+            builder: (context, c) {
+              final pause = _pauseRect(Size(c.maxWidth, c.maxHeight));
+              return Stack(
+                children: [
+                  Positioned.fill(child: GameWidget(game: _game)),
+                  Positioned(
+                    left: pause.left,
+                    top: pause.top,
+                    child: HoldButton(
+                      key: const ValueKey('pause'),
+                      size: pause.width,
+                      semanticLabel: 'Pause (hold)',
+                      onHeld: () => _setPaused(true),
+                      child: const Icon(Icons.pause_rounded, color: Palette.walnut, size: 36),
+                    ),
                   ),
-                ),
-            ],
-          );
-        }),
+                  if (_paused)
+                    Positioned.fill(
+                      child: _PauseMenu(onResume: () => _setPaused(false), onHome: () => Navigator.of(context).pop()),
+                    ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
     );
   }

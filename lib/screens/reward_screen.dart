@@ -6,6 +6,7 @@ import '../app.dart';
 import '../game/workshop_game.dart';
 import '../theme.dart';
 import '../widgets/buttons.dart';
+import '../widgets/keep_awake.dart';
 import 'common.dart';
 import 'gameplay_screen.dart';
 import 'goodnight_screen.dart';
@@ -50,9 +51,11 @@ class _RewardScreenState extends State<RewardScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) => _replay());
   }
 
-  void _after(Duration d, VoidCallback f) => _timers.add(Timer(d, () {
-        if (mounted) f();
-      }));
+  void _after(Duration d, VoidCallback f) => _timers.add(
+    Timer(d, () {
+      if (mounted) f();
+    }),
+  );
 
   /// Replays the child's notes, two per beat at the level's tempo.
   void _replay() {
@@ -97,81 +100,84 @@ class _RewardScreenState extends State<RewardScreen> {
 
   void _next() {
     final next = _services.levels.after(widget.result.level);
-    Navigator.of(context).pushReplacement(
-        fadeRoute(next == null ? const WorldPickerScreen() : GameplayScreen(level: next)));
+    Navigator.of(
+      context,
+    ).pushReplacement(fadeRoute(next == null ? const WorldPickerScreen() : GameplayScreen(level: next)));
   }
 
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.sizeOf(context).height;
     final showButtons = _replayDone && !widget.sessionOver;
-    return Scaffold(
-      body: WorkshopBackground(
-        child: Stack(
-          children: [
-            Positioned(
-              left: 0,
-              right: 0,
-              top: h * 0.04,
-              child: _SongRow(notes: _song, playing: _playing, dot: (h * 0.07).clamp(18, 40)),
-            ),
-            Align(
-              alignment: const Alignment(0, 0.35),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  AnimatedRotation(
-                    turns: _dance ? 0.02 : -0.02,
-                    duration: const Duration(milliseconds: 180),
-                    child: character(_dance ? 'milo_celebrate' : 'milo_hit_left', height: h * 0.42),
-                  ),
-                  SizedBox(width: h * 0.08),
-                  AnimatedRotation(
-                    turns: _dance ? -0.03 : 0.03,
-                    duration: const Duration(milliseconds: 180),
-                    child: character(_dance ? 'pip_dance' : 'pip_clap', height: h * 0.44),
-                  ),
-                ],
-              ),
-            ),
-            if (showButtons) ...[
-              Positioned(
-                left: 16,
-                top: h * 0.3,
-                child: PictureButton(
-                  key: const ValueKey('again'),
-                  size: (h * 0.26).clamp(88, 150),
-                  color: Palette.cream,
-                  semanticLabel: 'Play again',
-                  onTap: _again,
-                  child: Icon(Icons.replay_rounded, color: Palette.walnut, size: (h * 0.17).clamp(56, 96)),
-                ),
-              ),
-              Positioned(
-                right: 16,
-                top: h * 0.3,
-                child: PictureButton(
-                  key: const ValueKey('next'),
-                  size: (h * 0.3).clamp(96, 170),
-                  color: Palette.green,
-                  semanticLabel: 'Next',
-                  onTap: _next,
-                  child: Icon(Icons.arrow_forward_rounded, color: Colors.white, size: (h * 0.2).clamp(64, 110)),
-                ),
-              ),
+    return KeepAwake(
+      child: Scaffold(
+        body: WorkshopBackground(
+          child: Stack(
+            children: [
               Positioned(
                 left: 0,
                 right: 0,
-                bottom: 8,
-                child: _Xylophone(
-                  active: _xyloActive,
-                  height: (h * 0.2).clamp(64, 120),
-                  onNote: (i) => _services.audio.playChime(i),
+                top: h * 0.04,
+                child: _SongRow(notes: _song, playing: _playing, dot: (h * 0.07).clamp(18, 40)),
+              ),
+              Align(
+                alignment: const Alignment(0, 0.35),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    AnimatedRotation(
+                      turns: _dance ? 0.02 : -0.02,
+                      duration: const Duration(milliseconds: 180),
+                      child: character(_dance ? 'milo_celebrate' : 'milo_hit_left', height: h * 0.42),
+                    ),
+                    SizedBox(width: h * 0.08),
+                    AnimatedRotation(
+                      turns: _dance ? -0.03 : 0.03,
+                      duration: const Duration(milliseconds: 180),
+                      child: character(_dance ? 'pip_dance' : 'pip_clap', height: h * 0.44),
+                    ),
+                  ],
                 ),
               ),
+              if (showButtons) ...[
+                Positioned(
+                  left: 16,
+                  top: h * 0.3,
+                  child: PictureButton(
+                    key: const ValueKey('again'),
+                    size: (h * 0.26).clamp(88, 150),
+                    color: Palette.cream,
+                    semanticLabel: 'Play again',
+                    onTap: _again,
+                    child: Icon(Icons.replay_rounded, color: Palette.walnut, size: (h * 0.17).clamp(56, 96)),
+                  ),
+                ),
+                Positioned(
+                  right: 16,
+                  top: h * 0.3,
+                  child: PictureButton(
+                    key: const ValueKey('next'),
+                    size: (h * 0.3).clamp(96, 170),
+                    color: Palette.green,
+                    semanticLabel: 'Next',
+                    onTap: _next,
+                    child: Icon(Icons.arrow_forward_rounded, color: Colors.white, size: (h * 0.2).clamp(64, 110)),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 8,
+                  child: _Xylophone(
+                    active: _xyloActive,
+                    height: (h * 0.2).clamp(64, 120),
+                    onNote: (i) => _services.audio.playChime(i),
+                  ),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
@@ -187,22 +193,22 @@ class _SongRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Wrap(
-        alignment: WrapAlignment.center,
-        children: [
-          for (var i = 0; i < notes.length; i++)
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 120),
-              margin: EdgeInsets.fromLTRB(3, i == playing ? 0 : dot * 0.3 + (5 - notes[i]) * 2, 3, 0),
-              width: dot,
-              height: dot,
-              decoration: BoxDecoration(
-                color: noteColours[notes[i]].withValues(alpha: i <= playing || playing < 0 ? 1 : 0.35),
-                shape: BoxShape.circle,
-                border: Border.all(color: Palette.walnut, width: 3),
-              ),
-            ),
-        ],
-      );
+    alignment: WrapAlignment.center,
+    children: [
+      for (var i = 0; i < notes.length; i++)
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 120),
+          margin: EdgeInsets.fromLTRB(3, i == playing ? 0 : dot * 0.3 + (5 - notes[i]) * 2, 3, 0),
+          width: dot,
+          height: dot,
+          decoration: BoxDecoration(
+            color: noteColours[notes[i]].withValues(alpha: i <= playing || playing < 0 ? 1 : 0.35),
+            shape: BoxShape.circle,
+            border: Border.all(color: Palette.walnut, width: 3),
+          ),
+        ),
+    ],
+  );
 }
 
 /// Six xylophone bars (low to high). Optional fun; it rests after 20 s.
@@ -215,31 +221,31 @@ class _Xylophone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => AnimatedOpacity(
-        opacity: active ? 1 : 0.35,
-        duration: const Duration(milliseconds: 600),
-        child: IgnorePointer(
-          ignoring: !active,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              for (var i = 0; i < 6; i++)
-                GestureDetector(
-                  key: ValueKey('xylo-$i'),
-                  onTapDown: (_) => onNote(i),
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 5),
-                    width: kMinTouch + 4,
-                    height: height * (1 - i * 0.08),
-                    decoration: BoxDecoration(
-                      color: noteColours[i],
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(color: Palette.walnut, width: 4),
-                    ),
-                  ),
+    opacity: active ? 1 : 0.35,
+    duration: const Duration(milliseconds: 600),
+    child: IgnorePointer(
+      ignoring: !active,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          for (var i = 0; i < 6; i++)
+            GestureDetector(
+              key: ValueKey('xylo-$i'),
+              onTapDown: (_) => onNote(i),
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 5),
+                width: kMinTouch + 4,
+                height: height * (1 - i * 0.08),
+                decoration: BoxDecoration(
+                  color: noteColours[i],
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Palette.walnut, width: 4),
                 ),
-            ],
-          ),
-        ),
-      );
+              ),
+            ),
+        ],
+      ),
+    ),
+  );
 }

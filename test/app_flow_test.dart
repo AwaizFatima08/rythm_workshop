@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rhythm_workshop/app.dart';
 import 'package:rhythm_workshop/game/workshop_game.dart';
@@ -10,6 +11,7 @@ import 'package:rhythm_workshop/screens/parent_settings_screen.dart';
 import 'package:rhythm_workshop/screens/reward_screen.dart';
 import 'package:rhythm_workshop/screens/world_picker_screen.dart';
 import 'package:rhythm_workshop/settings/game_settings.dart';
+import 'package:rhythm_workshop/widgets/keep_awake.dart';
 import 'package:rhythm_workshop/widgets/parental_gate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -108,6 +110,41 @@ void main() {
     await settle(tester);
     expect(find.byType(LevelPickerScreen), findsOneWidget);
     expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('screen stays on during play, reward and next level; menus let it sleep', (tester) async {
+    final calls = <bool>[];
+    tester.binding.defaultBinaryMessenger.setMockMethodCallHandler(const MethodChannel('rhythm_workshop/screen'),
+        (call) async {
+      calls.add(call.arguments as bool);
+      return null;
+    });
+    addTearDown(() => tester.binding.defaultBinaryMessenger
+        .setMockMethodCallHandler(const MethodChannel('rhythm_workshop/screen'), null));
+    final level = loadLevel('colour_01');
+    await pumpApp(tester, home: const LevelPickerScreen(world: 1));
+    await settle(tester);
+    expect(KeepAwake.holders, 0);
+    await tester.tap(find.byKey(const ValueKey('level-colour_01')));
+    await settle(tester);
+    expect(calls, [true], reason: 'gameplay keeps the screen on');
+    // Level done -> reward -> next level: the screen never switches off in between.
+    final nav = tester.state<NavigatorState>(find.byType(Navigator));
+    nav.pushReplacement(fadeRoute(RewardScreen(result: LevelResult(level: level, notes: const [0, 1]))));
+    await settle(tester);
+    await tester.pump(const Duration(seconds: 4));
+    await settle(tester);
+    await tester.tap(find.byKey(const ValueKey('next')));
+    await settle(tester);
+    expect(find.byType(GameplayScreen), findsOneWidget);
+    expect(calls, [true], reason: 'no off/on flicker across screen handovers');
+    await tester.binding.handlePopRoute(); // opens the pause menu
+    await tester.pump();
+    await tester.tap(find.byKey(const ValueKey('pause-home')));
+    await settle(tester);
+    expect(find.byType(LevelPickerScreen), findsOneWidget);
+    expect(calls, [true, false], reason: 'menus let the phone sleep');
+    expect(KeepAwake.holders, 0);
   });
 
   testWidgets('settings: tap on the gear does nothing; long-press + gate opens them', (tester) async {

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../app.dart';
 import '../game/effects.dart';
+import '../widgets/keep_awake.dart';
 import 'common.dart';
 
 /// Session end: the workshop gets dark, Pip sleeps, a music-box lullaby plays
@@ -20,8 +21,8 @@ class GoodnightScreen extends StatefulWidget {
 
 class _GoodnightScreenState extends State<GoodnightScreen> with SingleTickerProviderStateMixin {
   late final AppServices _services = AppScope.read(context);
-  late final AnimationController _dark =
-      AnimationController(vsync: this, duration: const Duration(seconds: 3))..forward();
+  late final AnimationController _dark = AnimationController(vsync: this, duration: const Duration(seconds: 3))
+    ..forward();
   final List<Timer> _timers = [];
 
   @override
@@ -53,19 +54,27 @@ class _GoodnightScreenState extends State<GoodnightScreen> with SingleTickerProv
   @override
   Widget build(BuildContext context) {
     final h = MediaQuery.sizeOf(context).height;
-    return PopScope(
-      canPop: false,
-      child: Scaffold(
-        body: AnimatedBuilder(
-          animation: _dark,
-          builder: (context, child) => WorkshopBackground(
-            dim: 0.7 * _dark.value,
-            child: Stack(
-              fit: StackFit.expand,
-              children: [
-                Opacity(opacity: _dark.value, child: const CustomPaint(painter: _NightSky())),
-                Align(alignment: const Alignment(0, 0.6), child: character('pip_sleep', height: h * 0.5)),
-              ],
+    return KeepAwake(
+      child: PopScope(
+        canPop: false,
+        child: Scaffold(
+          body: AnimatedBuilder(
+            animation: _dark,
+            builder: (context, child) => WorkshopBackground(
+              dim: 0.7 * _dark.value,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  Opacity(
+                    opacity: _dark.value,
+                    child: const CustomPaint(painter: _NightSky()),
+                  ),
+                  Align(
+                    alignment: const Alignment(0, 0.6),
+                    child: character('pip_sleep', height: h * 0.5),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
