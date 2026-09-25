@@ -4,9 +4,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:rhythm_workshop/game/layout.dart';
 
 void main() {
-  // Landscape logical sizes: small old phone, common phones, tablets.
+  // Landscape logical sizes: small old phone, Galaxy A12 with density 340 (753x339),
+  // a worse case (700x320), common phones, tablets.
   const screens = [
-    Size(640, 360), Size(732, 412), Size(800, 360), Size(915, 412), Size(960, 540),
+    Size(640, 360), Size(753, 339), Size(700, 320), Size(732, 412), Size(800, 360), Size(915, 412), Size(960, 540),
     Size(1024, 600), Size(1280, 800), Size(1368, 1024), Size(2000, 1200),
   ];
 

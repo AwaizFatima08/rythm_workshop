@@ -36,6 +36,28 @@ Future<void> settle(WidgetTester tester) async {
 }
 
 void main() {
+  for (final size in const [Size(753, 339), Size(1280, 800)]) {
+    testWidgets('every child screen lays out without overflow at ${size.width.toInt()}x${size.height.toInt()}',
+        (tester) async {
+      final level = loadLevel('colour_03');
+      for (final home in <Widget>[
+        const HomeScreen(),
+        const WorldPickerScreen(),
+        const LevelPickerScreen(world: 1),
+        const LevelPickerScreen(world: 4),
+        RewardScreen(result: LevelResult(level: level, notes: const [0, 1, 2])),
+        const ParentSettingsScreen(),
+      ]) {
+        await pumpApp(tester, home: home, size: size);
+        await settle(tester);
+        await tester.pump(const Duration(seconds: 5));
+        expect(tester.takeException(), isNull, reason: '${home.runtimeType} at $size');
+      }
+      await tester.pumpWidget(const SizedBox());
+      await tester.pump(const Duration(seconds: 30));
+    });
+  }
+
   testWidgets('home plays the welcome once, then Play → worlds → levels → gameplay', (tester) async {
     final s = await pumpApp(tester);
     await settle(tester);

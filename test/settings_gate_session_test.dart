@@ -87,7 +87,7 @@ void main() {
     }
 
     testWidgets('right answer opens; answers are always two digits', (tester) async {
-      tester.view.physicalSize = const Size(800, 360);
+      tester.view.physicalSize = const Size(753, 339); // Galaxy A12 at density 340
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
       final result = await open(tester, 1);
@@ -95,11 +95,11 @@ void main() {
       expect(a * b, inInclusiveRange(30, 81));
       await type(tester, a * b);
       expect(await result, isTrue);
-      expect(tester.takeException(), isNull, reason: 'dialog fits a 360 dp-tall phone');
+      expect(tester.takeException(), isNull, reason: 'dialog fits a 339 dp-tall phone');
     });
 
     testWidgets('three wrong answers close it; each miss gives a new problem', (tester) async {
-      tester.view.physicalSize = const Size(800, 360);
+      tester.view.physicalSize = const Size(753, 339);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
       final result = await open(tester, 2);
