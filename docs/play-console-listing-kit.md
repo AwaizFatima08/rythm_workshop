@@ -84,7 +84,7 @@ Everything to paste into Play Console for the first release. Publisher: **HomiLa
 1. Play Console → Create app (values above).
 2. Upload `releases/v1.0.0-1/rhythm-workshop-1.0.0-1.aab` to **Internal testing**; accept Play App Signing.
 3. Complete Store listing, App content and Data safety from this file.
-4. Upload the `website/` folder (or `releases/website-rythmworkshop.zip`) to the root of rhythmworkshop.homilabs.org, then check all four pages open over HTTPS.
+4. Upload the `website/` folder (or `releases/website-rhythmworkshop.zip`) to the root of rhythmworkshop.homilabs.org, then check all four pages open over HTTPS.
 5. New personal developer accounts need a **closed test with 12+ testers for 14 days** before production.
 
 **Website**: `website/` holds the landing page, privacy policy, terms and delete-my-data pages for rhythmworkshop.homilabs.org (plain static files, any host). The older GitHub Pages copy at https://awaizfatima08.github.io/rythm_workshop/privacy-policy.html stays as a backup and says the same thing.
