@@ -54,3 +54,5 @@ scripts/backup.log
 scripts/__pycache__/
 .~lock.*#
 android/build/
+# Download packages (website zips etc.); the real files are committed
+/*.zip
