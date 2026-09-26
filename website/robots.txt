@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rythmworkshop.homilabs.org/sitemap.xml
+Sitemap: https://rhythmworkshop.homilabs.org/sitemap.xml
