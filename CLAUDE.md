@@ -20,11 +20,12 @@ A sort-to-the-beat learning game for children aged 3–6: toys ride a conveyor b
 - GitHub (**public**): `git@github.com:AwaizFatima08/rythm_workshop.git` (the folder and repo keep the "rythm" spelling)
 - Backup: `bash scripts/backup.sh`. Commit first; the GitHub layer refuses to push with untracked or uncommitted files.
 
-## Status (2026-09-25)
-v1.0.0 (versionCode 1) is built, signed with the upload key and tested; ready for the owner to upload.
+## Status (2026-09-27)
+v1.0.0 (versionCode 1) was submitted to Google Play and is **under review** (2026-09-27). The next upload must use versionCode 2 or higher.
 - `releases/v1.0.0-1/`: AAB, APK, SHA256SUMS, BUILD_INFO (gitignored; in the local and Drive backups).
 - Tests: 94 host tests; on-device suite 3/3 on the emulator and 3/3 on the Galaxy A12 (clock within 0.3%). Owner checks by ear and with children remain (`docs/testing.md` §4).
-- Privacy policy is live: https://awaizfatima08.github.io/rythm_workshop/privacy-policy.html (GitHub Pages from `/docs`).
+- Website (Hostinger): https://rhythmworkshop.homilabs.org/ (landing, privacy, terms, delete-my-data; source in `website/`). The old GitHub Pages policy copy remains as a backup. Once the app is live, swap the site's "Coming soon" button for the Google Play badge.
+- Pending for the next app update: add homilabs.smc@gmail.com to the in-app privacy text.
 - Play Console text and forms: `docs/play-console-listing-kit.md`. Store graphics: `store-assets/`.
 
 ## Code map
