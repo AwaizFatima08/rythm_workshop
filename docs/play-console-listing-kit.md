@@ -44,7 +44,7 @@ Everything to paste into Play Console for the first release. Publisher: **HomiLa
 > • Feeling a steady beat
 > • Careful finger control
 >
-> 12 levels in 4 worlds, all open from the start. English and Urdu voice.
+> 18 levels in 5 worlds, all open from the start. English and Urdu voice.
 >
 > For parents
 > • Works fully offline, with no internet permission at all.
@@ -93,3 +93,11 @@ Everything to paste into Play Console for the first release. Publisher: **HomiLa
 
 - Target SDK 36, min SDK 24. Release APK/AAB has **no INTERNET permission** (checked with `aapt2 dump permissions`).
 - Upload key: `.secrets/rhythm-workshop-upload.keystore` (alias `upload`); passwords in `.secrets/rhythm-workshop-upload-keystore-credentials.txt`. Both are in the local and Drive backups, never in GitHub. Upload certificate SHA-1 `1F:3D:8C:93:FD:6C:50:B6:B8:F2:40:EB:CF:68:77:EF:2B:D4:39:1C`.
+
+
+## Release notes — v1.1.0 (versionCode 2)
+
+```
+New: a Counting world (sort cards with one, two or three toys) and three more
+pattern levels (colours, fruit-veg-veg, circle-circle-square). 18 levels in 5 worlds.
+```

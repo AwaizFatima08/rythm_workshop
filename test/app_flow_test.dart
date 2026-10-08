@@ -78,7 +78,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('world-4')));
     await settle(tester);
     expect(find.byType(LevelPickerScreen), findsOneWidget);
-    expect(find.byType(LevelCard), findsNWidgets(3));
+    expect(find.byType(LevelCard), findsNWidgets(6), reason: "world 4 holds the pattern pack");
 
     await tester.tap(find.byKey(const ValueKey('level-pattern_01')));
     await settle(tester);

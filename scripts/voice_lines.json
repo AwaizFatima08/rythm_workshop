@@ -6,6 +6,7 @@
     "vo_prompt_size":    {"en": "Big ones here, small ones there!", "ur": "بڑے یہاں، چھوٹے وہاں!", "ur_tts": "बड़े यहाँ, छोटे वहाँ!"},
     "vo_prompt_shape":   {"en": "Circles here, squares there!", "ur": "گول یہاں، چوکور وہاں!", "ur_tts": "गोल यहाँ, चौकोर वहाँ!"},
     "vo_prompt_food":    {"en": "Fruits here, vegetables there!", "ur": "پھل یہاں، سبزیاں وہاں!", "ur_tts": "फल यहाँ, सब्ज़ियाँ वहाँ!"},
+    "vo_prompt_count":   {"en": "One here, two there, three over there!", "ur": "ایک یہاں، دو وہاں، تین اُدھر!", "ur_tts": "एक यहाँ, दो वहाँ, तीन उधर!"},
     "vo_prompt_pattern": {"en": "Fruit, vegetable, fruit... what comes next?", "ur": "پھل، سبزی، پھل... آگے کیا آئے گا؟", "ur_tts": "फल, सब्ज़ी, फल... आगे क्या आएगा?"},
     "vo_try_here":       {"en": "Try this one!", "ur": "یہاں ڈالیں!", "ur_tts": "यहाँ डालें!"},
     "vo_praise_01":      {"en": "Great rhythm!", "ur": "شاباش! بہت خوب!", "ur_tts": "शाबाश! बहुत ख़ूब!"},

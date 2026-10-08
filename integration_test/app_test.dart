@@ -93,7 +93,7 @@ void main() {
     // Splash loads sounds and levels, then Home.
     await waitFor(tester, find.byType(HomeScreen), timeout: 30);
     expect(audio.isReady, isTrue, reason: 'flutter_soloud initialised and effects loaded');
-    expect(services.levels.all, hasLength(12));
+    expect(services.levels.all, hasLength(18));
 
     await tapKey(tester, 'play');
     await tapKey(tester, 'world-1');
@@ -197,7 +197,7 @@ void main() {
     expect(settings.language, VoiceLanguage.ur);
     // Every Urdu and English voice file loads in the real engine.
     for (final id in ['vo_welcome', 'vo_prompt_colour', 'vo_prompt_size', 'vo_prompt_shape', 'vo_prompt_food',
-      'vo_prompt_pattern', 'vo_try_here', 'vo_praise_01', 'vo_praise_02', 'vo_goodnight']) {
+      'vo_prompt_pattern', 'vo_prompt_count', 'vo_try_here', 'vo_praise_01', 'vo_praise_02', 'vo_goodnight']) {
       await audio.playVoice(id);
     }
     settings.language = VoiceLanguage.en;

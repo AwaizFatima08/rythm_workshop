@@ -5,7 +5,7 @@ import '../widgets/buttons.dart';
 import 'common.dart';
 import 'level_picker_screen.dart';
 
-/// Four picture cards, one per world. Stars show finished levels (no numbers).
+/// One picture card per world (as many worlds as the levels define). Stars show finished levels (no numbers).
 class WorldPickerScreen extends StatelessWidget {
   const WorldPickerScreen({super.key});
 
@@ -27,13 +27,14 @@ class WorldPickerScreen extends StatelessWidget {
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      for (var w = 1; w <= 4; w++)
+                      for (var w = 1; w <= services.levels.worldCount; w++)
                         Padding(
                           padding: const EdgeInsets.all(8),
                           child: _WorldCard(
                             world: w,
                             height: cardH,
                             stars: services.levels.world(w).where((l) => services.settings.stars(l.id) > 0).length,
+                            of: services.levels.world(w).length,
                           ),
                         ),
                     ],
@@ -49,11 +50,12 @@ class WorldPickerScreen extends StatelessWidget {
 }
 
 class _WorldCard extends StatefulWidget {
-  const _WorldCard({required this.world, required this.height, required this.stars});
+  const _WorldCard({required this.world, required this.height, required this.stars, required this.of});
 
   final int world;
   final double height;
   final int stars;
+  final int of;
 
   @override
   State<_WorldCard> createState() => _WorldCardState();
@@ -81,7 +83,7 @@ class _WorldCardState extends State<_WorldCard> {
             children: [
               Image.asset('assets/images/worlds/world_${widget.world}.png', height: widget.height),
               const SizedBox(height: 6),
-              StarRow(count: widget.stars, size: widget.height * 0.16),
+              StarRow(count: widget.stars, of: widget.of, size: widget.height * (widget.of > 3 ? 0.11 : 0.16)),
             ],
           ),
         ),

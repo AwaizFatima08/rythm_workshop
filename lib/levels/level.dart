@@ -116,6 +116,9 @@ class LevelRepository {
 
   List<Level> world(int w) => all.where((l) => l.world == w).toList();
 
+  /// Highest world number in the index (worlds are numbered 1..n without gaps).
+  int get worldCount => all.fold(0, (m, l) => l.world > m ? l.world : m);
+
   Level? after(Level level) {
     final i = all.indexWhere((l) => l.id == level.id);
     return i >= 0 && i + 1 < all.length ? all[i + 1] : null;

@@ -20,12 +20,11 @@ A sort-to-the-beat learning game for children aged 3–6: toys ride a conveyor b
 - GitHub (**public**): `git@github.com:AwaizFatima08/rythm_workshop.git` (the folder and repo keep the "rythm" spelling)
 - Backup: `bash scripts/backup.sh`. Commit first; the GitHub layer refuses to push with untracked or uncommitted files.
 
-## Status (2026-09-27)
-v1.0.0 (versionCode 1) was submitted to Google Play and is **under review** (2026-09-27). The next upload must use versionCode 2 or higher.
+## Status (2026-10-08)
+v1.0.0 (versionCode 1) is live on Google Play. **v1.1.0 (versionCode 2) is built in this repo and not yet uploaded**: 18 levels in 5 worlds — world 4 gained a pattern pack (`pattern_02` red/blue A-B, `pattern_03` fruit/veg A-B-B, `pattern_04` circle/circle/square A-A-B) and world 5 "Counting" (`count_01..03`, new sort rule `count`: bins with one/two/three dots, cards with that many toys). New voice line `vo_prompt_count` (Kokoro draft, EN+UR — listen before release). `SortingRules` now spawns pattern levels in the pattern's proportions (an A-B-B level needs twice as many B). Regenerate only new art with `python3 scripts/make_art.py count`; regenerate single voice lines with `make_voice.py <id>` so imported recordings survive. The in-app privacy text now also lists homilabs.smc@gmail.com.
 - `releases/v1.0.0-1/`: AAB, APK, SHA256SUMS, BUILD_INFO (gitignored; in the local and Drive backups).
-- Tests: 94 host tests; on-device suite 3/3 on the emulator and 3/3 on the Galaxy A12 (clock within 0.3%). Owner checks by ear and with children remain (`docs/testing.md` §4).
+- Tests: 101 host tests; on-device suite 3/3 on the emulator and 3/3 on the Galaxy A12 (clock within 0.3%). Owner checks by ear and with children remain (`docs/testing.md` §4).
 - Website (Hostinger): https://rhythmworkshop.homilabs.org/ (landing, privacy, terms, delete-my-data; source in `website/`). The old GitHub Pages policy copy remains as a backup. Once the app is live, swap the site's "Coming soon" button for the Google Play badge.
-- Pending for the next app update: add homilabs.smc@gmail.com to the in-app privacy text.
 - Play Console text and forms: `docs/play-console-listing-kit.md`. Store graphics: `store-assets/`.
 
 ## Code map

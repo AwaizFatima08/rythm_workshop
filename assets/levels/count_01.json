@@ -1,0 +1,58 @@
+{
+  "id": "count_01",
+  "index": 16,
+  "world": 5,
+  "sortBy": "count",
+  "music": "bgm_calm.ogg",
+  "bpm": 70,
+  "beltSpeed": 70,
+  "practiceTaps": true,
+  "voicePrompt": "vo_prompt_count",
+  "spawnEveryBeats": 4,
+  "maxOnBelt": 2,
+  "itemCount": 10,
+  "bins": [
+    {
+      "id": "one",
+      "symbol": "one",
+      "image": "bins/bin_one.png"
+    },
+    {
+      "id": "two",
+      "symbol": "two",
+      "image": "bins/bin_two.png"
+    }
+  ],
+  "items": [
+    {
+      "id": "count_duck_1",
+      "bin": "one",
+      "image": "items/count_duck_1.png"
+    },
+    {
+      "id": "count_ball_1",
+      "bin": "one",
+      "image": "items/count_ball_1.png"
+    },
+    {
+      "id": "count_car_1",
+      "bin": "one",
+      "image": "items/count_car_1.png"
+    },
+    {
+      "id": "count_duck_2",
+      "bin": "two",
+      "image": "items/count_duck_2.png"
+    },
+    {
+      "id": "count_ball_2",
+      "bin": "two",
+      "image": "items/count_ball_2.png"
+    },
+    {
+      "id": "count_car_2",
+      "bin": "two",
+      "image": "items/count_car_2.png"
+    }
+  ]
+}

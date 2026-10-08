@@ -93,6 +93,48 @@ void main() {
     });
   });
 
+  group('longer patterns (A-B-B, A-A-B)', () {
+    for (final id in ['pattern_03', 'pattern_04']) {
+      final level = loadLevel(id);
+      test('$id spawns bins in the pattern\'s proportions and never stalls', () {
+        for (var seed = 0; seed < 100; seed++) {
+          final rand = Random(seed);
+          final r = SortingRules(level, random: Random(seed));
+          // Queue holds exactly the next itemCount steps of the pattern.
+          final want = <String, int>{};
+          for (var i = 0; i < level.itemCount; i++) {
+            final b = level.pattern[i % level.pattern.length];
+            want[b] = (want[b] ?? 0) + 1;
+          }
+          final belt = <ItemDef>[];
+          final got = <String, int>{};
+          var guard = 0;
+          while (!r.complete) {
+            expect(++guard, lessThan(500), reason: 'stalled with seed $seed');
+            final bins = [for (final i in belt) i.bin];
+            if (r.canSpawn(belt.length, bins)) {
+              final it = r.takeNext(activeBins: bins)!;
+              got[it.bin] = (got[it.bin] ?? 0) + 1;
+              belt.add(it);
+            }
+            final pick = belt[rand.nextInt(belt.length)];
+            if (r.judge(pick, shelfId) == DropResult.correct) {
+              r.recordCorrect(pick);
+              belt.remove(pick);
+            } else {
+              r.recordWrong();
+            }
+          }
+          expect(got, want, reason: 'seed $seed');
+          expect(r.patternPlaced.length, level.pattern.length + level.itemCount);
+          for (var i = 0; i < r.patternPlaced.length; i++) {
+            expect(r.patternPlaced[i], level.pattern[i % level.pattern.length]);
+          }
+        }
+      });
+    }
+  });
+
   group('pattern level', () {
     final level = loadLevel('pattern_01');
 

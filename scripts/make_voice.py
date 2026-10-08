@@ -5,8 +5,11 @@ English: voice af_heart. Urdu: the Devanagari form of each line (voice_lines.jso
 'ur_tts') read by the Hindi voice hf_alpha. Output: assets/audio/vo/{en,ur}/<id>.ogg at -14 LUFS.
 
 Needs ~/tools/kokoro/kokoro-v1.0.onnx and voices-v1.0.bin (see CLAUDE.md).
-Run:  ~/tools/venvs/rhythm/bin/python scripts/make_voice.py
+Run:  ~/tools/venvs/rhythm/bin/python scripts/make_voice.py [line_id ...]
+With line ids, only those lines are (re)generated, so imported recordings of
+the other lines are left alone.
 """
+import sys
 import json
 import pathlib
 
@@ -45,6 +48,8 @@ def compress(y, sr, thresh_db=-24.0, ratio=3.0):
 
 def main():
     lines = json.loads((HERE / "voice_lines.json").read_text())["lines"]
+    if sys.argv[1:]:
+        lines = {k: v for k, v in lines.items() if k in sys.argv[1:]}
     k = Kokoro(str(MODEL / "kokoro-v1.0.onnx"), str(MODEL / "voices-v1.0.bin"))
     for lang, (voice, code, field, speed) in VOICES.items():
         for vid, text in lines.items():

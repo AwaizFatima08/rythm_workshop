@@ -12,13 +12,13 @@ void main() {
   const musicBpm = {'bgm_calm.ogg': 70, 'bgm_workshop_01.ogg': 80, 'bgm_workshop_02.ogg': 90};
   const colourSymbols = {'red': 'circle', 'blue': 'square', 'yellow': 'star', 'green': 'triangle'};
 
-  test('12 levels across 4 worlds, 3 per world, in order', () {
-    expect(levels, hasLength(12));
-    expect([for (final l in levels) l.index], List.generate(12, (i) => i + 1));
-    for (var w = 1; w <= 4; w++) {
-      expect(levels.where((l) => l.world == w), hasLength(3));
+  test('18 levels across 5 worlds (world 4 has the pattern pack), in order', () {
+    expect(levels, hasLength(18));
+    expect([for (final l in levels) l.index], List.generate(18, (i) => i + 1));
+    for (final e in {1: 3, 2: 3, 3: 3, 4: 6, 5: 3}.entries) {
+      expect(levels.where((l) => l.world == e.key), hasLength(e.value), reason: 'world ${e.key}');
     }
-    expect({for (final l in levels) l.id}, hasLength(12));
+    expect({for (final l in levels) l.id}, hasLength(18));
   });
 
   test('level BPM equals its music BPM (the beat is read from the music)', () {
@@ -27,8 +27,31 @@ void main() {
     }
   });
 
-  test('practice taps only on the first level of worlds 1-3 (levels 1, 4, 7)', () {
-    expect([for (final l in levels) if (l.practiceTaps) l.index], [1, 4, 7]);
+  test('practice taps only on the first level of worlds 1-3 and 5 (levels 1, 4, 7, 16)', () {
+    expect([for (final l in levels) if (l.practiceTaps) l.index], [1, 4, 7, 16]);
+  });
+
+  test('pattern levels: every pattern bin exists and longer patterns are A-B-B / A-A-B', () {
+    final patterns = {for (final l in levels.where((l) => l.isPattern)) l.id: l.pattern};
+    expect(patterns, {
+      'pattern_01': ['fruit', 'veg'],
+      'pattern_02': ['red', 'blue'],
+      'pattern_03': ['fruit', 'veg', 'veg'],
+      'pattern_04': ['circle', 'circle', 'square'],
+    });
+  });
+
+  test('counting levels: bins one/two/three carry dot symbols; each card shows that many toys', () {
+    for (final l in levels.where((l) => l.sortBy == 'count')) {
+      for (final b in l.bins) {
+        expect(['one', 'two', 'three'], contains(b.id));
+        expect(b.symbol, b.id);
+      }
+      for (final i in l.items) {
+        final n = int.parse(i.id.split('_').last);
+        expect(['one', 'two', 'three'][n - 1], i.bin, reason: i.id);
+      }
+    }
   });
 
   test('every colour bin carries its shape symbol (never colour alone)', () {
@@ -78,7 +101,7 @@ void main() {
     }
     for (final f in [
       'ui/background.png',
-      for (var w = 1; w <= 4; w++) 'worlds/world_$w.png',
+      for (var w = 1; w <= 5; w++) 'worlds/world_$w.png',
       for (final c in ['milo_idle', 'milo_hit_left', 'milo_hit_right', 'milo_celebrate', 'pip_idle', 'pip_clap',
         'pip_point', 'pip_hmm', 'pip_dance', 'pip_wave', 'pip_sleep'])
         'characters/$c.png',
@@ -96,7 +119,7 @@ void main() {
       for (final lang in ['en', 'ur'])
         for (final v in [
           'vo_welcome', 'vo_prompt_colour', 'vo_prompt_size', 'vo_prompt_shape', 'vo_prompt_food',
-          'vo_prompt_pattern', 'vo_try_here', 'vo_praise_01', 'vo_praise_02', 'vo_goodnight',
+          'vo_prompt_pattern', 'vo_prompt_count', 'vo_try_here', 'vo_praise_01', 'vo_praise_02', 'vo_goodnight',
         ])
           'vo/$lang/$v.ogg',
     ];
@@ -104,7 +127,8 @@ void main() {
       expect(File('assets/audio/$f').existsSync(), isTrue, reason: f);
     }
     for (final l in levels) {
-      expect(File('assets/audio/vo/en/${l.voicePrompt}.ogg').existsSync(), isTrue);
+      expect(File('assets/audio/vo/en/${l.voicePrompt}.ogg').existsSync(), isTrue, reason: l.id);
+      expect(File('assets/audio/vo/ur/${l.voicePrompt}.ogg').existsSync(), isTrue, reason: l.id);
     }
   });
 
@@ -113,7 +137,9 @@ void main() {
     final repo = LevelRepository();
     final all = await repo.load();
     expect(all.map((l) => l.id), levels.map((l) => l.id));
-    expect(repo.world(4).map((l) => l.index), [10, 11, 12]);
+    expect(repo.world(4).map((l) => l.index), [10, 11, 12, 13, 14, 15]);
+    expect(repo.world(5).map((l) => l.index), [16, 17, 18]);
+    expect(repo.worldCount, 5);
     expect(repo.after(all[3])!.id, all[4].id);
     expect(repo.after(all.last), isNull);
   });

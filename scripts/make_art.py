@@ -66,6 +66,11 @@ def symbol(kind, cx, cy, r, fill, stroke=S4):
         h = r * 1.9
         return (f'<path d="M{cx},{cy - h * 0.6} L{cx + h * 0.62},{cy + h * 0.45} L{cx - h * 0.62},{cy + h * 0.45} Z" '
                 f'fill="{fill}" {stroke}/>')
+    if kind in ("one", "two", "three"):
+        n = ("one", "two", "three").index(kind) + 1
+        d = r * 0.55
+        xs = {1: [0], 2: [-r * 0.75, r * 0.75], 3: [-r * 1.3, 0, r * 1.3]}[n]
+        return "".join(f'<circle cx="{cx + x:.1f}" cy="{cy}" r="{d:.1f}" fill="{fill}" {stroke}/>' for x in xs)
     raise ValueError(kind)
 
 
@@ -225,6 +230,34 @@ def make_items():
             save(f"items/shape_{kind}_{c}", shape_block(kind, c), 200, 200, 320)
     for name, body in FOOD.items():
         save(f"items/{name}", body, 200, 200, 320)
+
+
+# World 5 (counting): a card with one, two or three of the same toy. The toy is
+# shrunk so the group stays inside the 200 x 200 frame; scale and the drag grab
+# margin keep every card at least 64 dp to grab.
+COUNT_TOYS = {"duck": ("yellow", duck), "ball": ("red", ball), "car": ("blue", car)}
+COUNT_LAYOUT = {1: [(100, 100, 0.86)], 2: [(52, 100, 0.5), (148, 100, 0.5)],
+                3: [(60, 68, 0.5), (140, 68, 0.5), (100, 136, 0.5)]}
+
+
+def count_card(toy, n):
+    colour, fn = COUNT_TOYS[toy]
+    parts = []
+    for cx, cy, s in COUNT_LAYOUT[n]:
+        parts.append(f'<g transform="translate({cx - 100 * s:.1f} {cy - 100 * s:.1f}) scale({s})">{fn(colour)}</g>')
+    return "".join(parts)
+
+
+def make_count():
+    for toy in COUNT_TOYS:
+        for n in (1, 2, 3):
+            save(f"items/count_{toy}_{n}", count_card(toy, n), 200, 200, 320)
+    for n, word in ((1, "one"), (2, "two"), (3, "three")):
+        save(f"bins/bin_{word}", crate(WOOD, symbol(word, 125, 128, 24, WALNUT, f'stroke="{WALNUT}" stroke-width="4"')),
+             250, 200, 500)
+    save("worlds/world_5", card(g(duck("yellow"), 14, 34, 0.48) + g(duck("yellow"), 102, 34, 0.48) + g(duck("yellow"), 190, 34, 0.48)
+                                + symbol("three", 150, 180, 20, WALNUT, f'stroke="{WALNUT}" stroke-width="4"'),
+                                COLOURS["yellow"][0]), 300, 240, 450)
 
 
 # --- bins (250 x 200) -------------------------------------------------------------
@@ -418,7 +451,15 @@ def render():
 
 
 if __name__ == "__main__":
+    import sys
+    if sys.argv[1:] == ["count"]:
+        # Only the world-5 art, so hand-replaced PNGs elsewhere are left alone.
+        make_count()
+        render()
+        print(f"rendered {len(JOBS)} images")
+        sys.exit()
     make_items()
+    make_count()
     make_bins()
     make_pip()
     make_milo()

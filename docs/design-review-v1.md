@@ -35,3 +35,10 @@ Where this file and the design document disagree, **this file wins**.
 - **Privacy policy** is hosted with GitHub Pages from this public repo (same pattern as VisionCheck):
   `https://awaizfatima08.github.io/rythm_workshop/privacy-policy.html`. Contact email `info@homilabs.org`; change it in `docs/privacy-policy.html` if needed.
 - **Minimum Android version:** API 24 (Android 7.0), required by current Flutter.
+
+## 2. v1.1 additions (2026-10-08)
+
+D2's "12 levels" was the v1 scope; v1.1 ships 18 levels in 5 worlds with the same JSON format:
+- World 4 gained a pattern pack: `pattern_02` (red/blue toys, A-B), `pattern_03` (fruit/veg/veg, A-B-B), `pattern_04` (circle/circle/square, A-A-B). The shelf logic was already sequence-agnostic; `SortingRules` now spawns toys in the pattern's proportions so an A-B-B level cannot stall.
+- World 5 "Counting": sort rule `count`. Bins carry one, two or three dots (a shape symbol, never a numeral — no on-screen text for children, D11). Cards show one, two or three of the same toy, built from the existing toy SVGs (`make_art.py count`).
+- New voice line `vo_prompt_count`: "One here, two there, three over there!" (EN) / "ایک یہاں، دو وہاں، تین اُدھر!" (UR), Kokoro drafts like the others.

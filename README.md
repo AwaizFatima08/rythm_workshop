@@ -4,7 +4,7 @@ Sort toys to the beat. A calm, offline music-and-sorting game for children aged 
 
 Toys ride a conveyor belt in a wooden workshop. Children drag each toy into the right bin (by colour, size, shape, or fruit vs vegetable, then a simple pattern). Every correct sort plays a chime that lands on the beat, and at the end the child's notes replay as "the song you made".
 
-- 12 levels in 4 worlds, all open from the start
+- 18 levels in 5 worlds (colour, size, shape, fruit & veg, patterns, counting), all open from the start
 - No failure: wrong drops float back, toys never fall off, the music waits for the child
 - Colour always paired with a shape symbol; calm mode; English and Urdu voice
 - No internet permission, no ads, no purchases, no tracking

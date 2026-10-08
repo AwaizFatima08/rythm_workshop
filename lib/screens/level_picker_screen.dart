@@ -99,9 +99,11 @@ class LevelCard extends StatelessWidget {
             ),
             Expanded(
               child: LayoutBuilder(builder: (context, c) {
-                // Two bins side by side; three as two over one.
+                // Two bins side by side; three as two over one; four as a 2 x 2 grid
+                // (the A-B-B and A-A-B pattern cards show four bins).
                 final n = binImages.length;
-                final each = n == 3 ? (c.maxWidth - 8) / 2 : (c.maxWidth - 8 * (n - 1)) / n;
+                final cols = n <= 2 ? n : 2;
+                final each = (c.maxWidth - 8 * (cols - 1)) / cols;
                 return Center(
                   child: Wrap(
                     alignment: WrapAlignment.center,
@@ -110,7 +112,7 @@ class LevelCard extends StatelessWidget {
                     runSpacing: 4,
                     children: [
                       for (final img in binImages)
-                        Image.asset('assets/images/$img', width: each, height: c.maxHeight / (n == 3 ? 2.1 : 1)),
+                        Image.asset('assets/images/$img', width: each, height: c.maxHeight / (n > 2 ? 2.1 : 1)),
                     ],
                   ),
                 );

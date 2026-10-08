@@ -12,7 +12,7 @@ Rhythm Workshop collects no personal information and does not connect to the int
 • The app has no internet permission, so it cannot send anything anywhere.
 • Stars and these settings are stored only on this device. "Reset progress" below deletes the stars; uninstalling the app removes everything.
 
-Published by HomiLabs Solutions. Questions: info@homilabs.org''';
+Published by HomiLabs Solutions. Questions: info@homilabs.org or homilabs.smc@gmail.com''';
 
 const appVersion = '1.0.0';
 

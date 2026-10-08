@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Write the 12 level files (assets/levels/*.json) and index.json.
+"""Write the 18 level files (assets/levels/*.json) and index.json.
 
 Level BPM must equal its music's BPM: the beat clock reads the music position.
 Run:  python3 scripts/make_levels.py
@@ -36,6 +36,19 @@ def shape_items(kinds):
 def food_items():
     return ([{"id": f, "bin": "fruit", "image": f"items/{f}.png"} for f in FRUITS]
             + [{"id": v, "bin": "veg", "image": f"items/{v}.png"} for v in VEGS])
+
+
+COUNT_TOYS = {"duck": "yellow", "ball": "red", "car": "blue"}
+COUNT_WORDS = {1: "one", 2: "two", 3: "three"}
+
+
+def count_bins(ns):
+    return [{"id": COUNT_WORDS[n], "symbol": COUNT_WORDS[n], "image": f"bins/bin_{COUNT_WORDS[n]}.png"} for n in ns]
+
+
+def count_items(ns):
+    """Cards showing one, two or three of the same toy (world 5: counting)."""
+    return [{"id": f"count_{t}_{n}", "bin": COUNT_WORDS[n], "image": f"items/count_{t}_{n}.png"} for n in ns for t in COUNT_TOYS]
 
 
 SIZE_BINS = [{"id": "big", "symbol": "big", "image": "bins/bin_big.png"},
@@ -75,6 +88,20 @@ LEVELS = [
     level(11, "food_02", 4, "category", "bgm_workshop_02.ogg", 100, 12, "vo_prompt_food", FOOD_BINS, food_items()),
     level(12, "pattern_01", 4, "pattern", "bgm_workshop_02.ogg", 90, 10, "vo_prompt_pattern", FOOD_BINS, food_items(),
           pattern=["fruit", "veg"]),
+    # Pattern pack (world 4): colours, then longer A-B-B and A-A-B patterns.
+    level(13, "pattern_02", 4, "pattern", "bgm_workshop_01.ogg", 85, 10, "vo_prompt_pattern",
+          colour_bins(["red", "blue"]), colour_items(["red", "blue"]), pattern=["red", "blue"]),
+    level(14, "pattern_03", 4, "pattern", "bgm_workshop_02.ogg", 90, 12, "vo_prompt_pattern", FOOD_BINS, food_items(),
+          pattern=["fruit", "veg", "veg"]),
+    level(15, "pattern_04", 4, "pattern", "bgm_workshop_02.ogg", 95, 12, "vo_prompt_pattern",
+          shape_bins(["circle", "square"]), shape_items(["circle", "square"]), pattern=["circle", "circle", "square"]),
+    # World 5: counting. Bins show one, two or three dots; cards show that many toys.
+    level(16, "count_01", 5, "count", "bgm_calm.ogg", 70, 10, "vo_prompt_count", count_bins([1, 2]), count_items([1, 2]),
+          practice=True, max_on=2),
+    level(17, "count_02", 5, "count", "bgm_workshop_01.ogg", 80, 12, "vo_prompt_count", count_bins([1, 2, 3]),
+          count_items([1, 2, 3])),
+    level(18, "count_03", 5, "count", "bgm_workshop_02.ogg", 90, 12, "vo_prompt_count", count_bins([1, 2, 3]),
+          count_items([1, 2, 3])),
 ]
 
 if __name__ == "__main__":

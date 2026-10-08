@@ -57,11 +57,24 @@ class SortingRules {
   }
 
   List<ItemDef> _buildQueue() {
-    final binIds = level.isPattern ? level.pattern : [for (final b in level.bins) b.id];
-    final perBin = <String, int>{for (final b in binIds) b: level.itemCount ~/ binIds.length};
-    final extra = [...binIds]..shuffle(_random);
-    for (var i = 0; i < level.itemCount % binIds.length; i++) {
-      perBin[extra[i]] = perBin[extra[i]]! + 1;
+    final perBin = <String, int>{};
+    if (level.isPattern) {
+      // The shelf wants exactly the next itemCount steps of the repeating
+      // pattern (it starts with one full copy placed), so spawn those counts:
+      // an A-B-B level needs twice as many B as A, or play would stall.
+      for (var i = 0; i < level.itemCount; i++) {
+        final b = level.pattern[(level.pattern.length + i) % level.pattern.length];
+        perBin[b] = (perBin[b] ?? 0) + 1;
+      }
+    } else {
+      final binIds = [for (final b in level.bins) b.id];
+      for (final b in binIds) {
+        perBin[b] = level.itemCount ~/ binIds.length;
+      }
+      final extra = [...binIds]..shuffle(_random);
+      for (var i = 0; i < level.itemCount % binIds.length; i++) {
+        perBin[extra[i]] = perBin[extra[i]]! + 1;
+      }
     }
     // Shuffle until the same bin never comes 3 times in a row. With balanced
     // counts almost every shuffle qualifies, so this ends within a few tries.
